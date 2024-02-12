@@ -1,11 +1,22 @@
+const {nextui} = require("@nextui-org/react");
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        "main-bg": "#F9EFDB"
+      },
+      fontFamily:{
+        "poppins": ["Poppins"]
+      }
+    },
   },
-  plugins: [],
+  darkMode: "class",
+  plugins: [nextui()],
 }

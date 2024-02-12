@@ -1,10 +1,11 @@
 import React from "react";
 import './App.css'
+import Landing from "./components/Landing";
 
 export default function App(){
   return(
-    <div>
-      <h1 className="text-9xl">Spectrum Sense</h1>
+    <div className="font-poppins">
+      <Landing />
     </div>
   )
 }
