@@ -1,10 +1,11 @@
 import React from "react";
-import FormCard from "./register/FormCard";
+import FormCard from "./getStarted/Login";
+import LoginCard from "./getStarted/Login";
 
 
 function Register(){
   return <div>
-    <FormCard />
+    <LoginCard />
   </div>
 }
 
