@@ -1,35 +1,48 @@
-'use client'
-import React, { createContext, useState, ReactNode, SetStateAction, Dispatch, useContext } from "react";
+"use client";
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 interface ThemeContextProviderProps {
   children: ReactNode;
 }
 
-export interface Sonner {
-  sonner: string;
-  setSonner: Dispatch<SetStateAction<string>>;
+export interface User {
+  email: string;
+  displayName: string;
+  photoURL: string;
 }
 
-const ThemeContext = createContext<Sonner>({
-  sonner: '',
-  setSonner: () => {},
+interface UserContext {
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
+}
+
+export const ThemeContext = createContext<UserContext>({
+  user: {
+    email: "",
+    displayName: "",
+    photoURL: "",
+  },
+  setUser: () => {},
 });
 
-export default function ThemeContextProvider({
+export default function UserContextProvider({
   children,
 }: ThemeContextProviderProps) {
-  const [sonner, setSonner] = useState<string>('');
+  const [user, setUser] = useState<User>({
+    email: "",
+    displayName: "",
+    photoURL: "",
+  });
 
   return (
-    <ThemeContext.Provider value={{ sonner, setSonner }}>
+    <ThemeContext.Provider value={{ user, setUser }}>
       {children}
     </ThemeContext.Provider>
   );
-}
-
-
-export function useSonner(){
-  const context = useContext(ThemeContext);
-  if(context == null) throw "Use hook within the ThemeContextProvider boundaries"
-  return context;
 }

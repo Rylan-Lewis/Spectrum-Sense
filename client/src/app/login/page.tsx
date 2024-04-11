@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,6 +16,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner"
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator"
+import { FaGoogle } from "react-icons/fa";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -47,6 +49,7 @@ export default function Login() {
     },
   });
 
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -58,13 +61,13 @@ export default function Login() {
     } catch (error) {
       toast(`Error: ${error}`)
     }
-
-    console.log(values);
   }
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
-      <div className="w-1/2 flex flex-col ">
+      <div className="w-1/2 flex flex-col gap-5">
+        <h1 className="text-2xl">Login</h1>
+        <Separator />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -98,7 +101,21 @@ export default function Login() {
             <Button type="submit">Submit</Button>
           </form>
         </Form>
-        <Button className="text-[10px] md:text-base justify-end" variant={'link'}>{`Don't have an account? Register here!`} </Button>
+        <div className="self-end">
+        <Link href={'/register'}><Button className="text-[10px] md:text-base justify-end" variant={'link'}>{`Don't have an account? Register here!`} </Button></Link>
+        </div>
+        <Separator />
+        <div>
+              <Button>
+                <div className="flex items-center gap-5">
+                  <div>
+                    <FaGoogle />
+                  </div>
+                  <p>Sign in with Google</p>
+                </div>
+              </Button>
+        </div>
+
       </div>
     </div>
   );

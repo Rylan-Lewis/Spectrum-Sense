@@ -18,6 +18,8 @@ import { auth } from "../firebaseConfig";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+import { FaGoogle } from "react-icons/fa";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -69,7 +71,9 @@ export default function Register() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
-      <div className="w-1/2 flex flex-col ">
+      <div className="w-1/2 flex flex-col gap-5 ">
+        <h1 className="text-2xl">Register</h1>
+        <Separator />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -93,7 +97,11 @@ export default function Register() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="I know what you are typing" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="I know what you are typing"
+                      {...field}
+                    />
                   </FormControl>
                   {/* <FormDescription>Enter your password.</FormDescription> */}
                   <FormMessage />
@@ -103,14 +111,27 @@ export default function Register() {
             <Button type="submit">Submit</Button>
           </form>
         </Form>
-        <Link href={'/login'}>
-          <Button
-            className="text-[10px] md:text-base justify-end"
-            variant={"link"}
-          >
-            {`Already have an account? Register here!`}
-          </Button>
-        </Link>
+        <div className="self-end">
+          <Link href={"/login"}>
+            <Button
+              className="text-[10px] md:text-base self-end"
+              variant={"link"}
+            >
+              {`Already have an account? Login here!`}
+            </Button>
+          </Link>
+        </div>
+        <Separator />
+        <div>
+              <Button>
+                <div className="flex items-center gap-5">
+                  <div>
+                    <FaGoogle />
+                  </div>
+                  <p>Sign in with Google</p>
+                </div>
+              </Button>
+        </div>
       </div>
     </div>
   );
