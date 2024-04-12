@@ -8,7 +8,8 @@ export default function useAuth() {
  const { setUser } = useInfo();
 
  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+  async function stateChange(){
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         const payload: User = {
           email: user.email || '', // Provide a default value to avoid null
@@ -20,8 +21,8 @@ export default function useAuth() {
         setUser({ email: '', displayName: '', photoURL: '' });
       }
     });
+  }
 
-    // Cleanup function
-    return () => unsubscribe();
- }, [setUser]); // Dependency array ensures this effect runs only once
+  stateChange();
+ }, [setUser]); 
 }

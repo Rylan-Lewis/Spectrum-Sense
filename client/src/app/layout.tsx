@@ -15,7 +15,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Spectrum Sense",
   description:
-    "Made with ❤️ by Rylan Lewis, Mustafa Motiwala & Kartikeya Mishra",
+    "Made with ❤️ by Aarya Tiwari, Atharva Desai, Rahul Dandona,  & Kartikeya Mishra",
 };
 
 export default function RootLayout({

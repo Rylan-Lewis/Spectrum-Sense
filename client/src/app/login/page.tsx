@@ -19,6 +19,7 @@ import { toast } from "sonner"
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator"
 import { FaGoogle } from "react-icons/fa";
+import useGoogleAuth from "@/hooks/useGoogleAuth";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -63,6 +64,8 @@ export default function Login() {
     }
   }
 
+  const googleAuth = useGoogleAuth();
+
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
       <div className="w-1/2 flex flex-col gap-5">
@@ -102,11 +105,11 @@ export default function Login() {
           </form>
         </Form>
         <div className="self-end">
-        <Link href={'/register'}><Button className="text-[10px] md:text-base justify-end" variant={'link'}>{`Don't have an account? Register here!`} </Button></Link>
+        <Link href={'/register'}><Button className="text-xs md:text-base justify-end" variant={'link'}>{`Don't have an account? Register here!`} </Button></Link>
         </div>
         <Separator />
         <div>
-              <Button>
+              <Button onClick={googleAuth}>
                 <div className="flex items-center gap-5">
                   <div>
                     <FaGoogle />
