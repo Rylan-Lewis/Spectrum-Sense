@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import Navbar from "@/components/custom-components/Navbar";
 import ThemeContextProvider from "@/context/themecontext";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -24,13 +25,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("dark", poppins.className)}>
-        <ThemeContextProvider>
-          <Navbar />
-          {children}
-          <Toaster />
-        </ThemeContextProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={poppins.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ThemeContextProvider>
+            <Navbar />
+            {children}
+            <Toaster />
+          </ThemeContextProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

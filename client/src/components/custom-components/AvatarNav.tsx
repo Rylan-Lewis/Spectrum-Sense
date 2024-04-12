@@ -13,7 +13,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { signOut } from "firebase/auth";
 import { auth } from "@/app/firebaseConfig";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { destroyCookie } from "nookies";
 
 export default function AvatarNav() {
   const { user, setUser } = useInfo();
@@ -27,9 +28,11 @@ export default function AvatarNav() {
   async function handleClick() {
     try {
       const response = await signOut(auth);
-      setUser({ email: "", displayName: "", photoURL: "" });
-      router.push("/");
+      setUser({ email: '', displayName: '', photoURL: '' , uid: '', accessToken: ''});
+      destroyCookie(null, "token");
+      destroyCookie(null, "uid");
       toast("You have been logged out successfully!");
+      router.push('/')
     } catch (error) {
       toast("Some error occurred!")
     }   
@@ -42,7 +45,7 @@ export default function AvatarNav() {
           <DropdownMenuTrigger>
             <div className="flex justify-center items-center gap-2">
               <Avatar>
-                <AvatarImage src={null}></AvatarImage>
+                <AvatarImage src={''}></AvatarImage>
                 <AvatarFallback>
                   {user.email.charAt(0).toUpperCase()}
                 </AvatarFallback>

@@ -15,6 +15,8 @@ export interface User {
   email: string;
   displayName: string;
   photoURL: string;
+  uid: string;
+  accessToken: string;
 }
 
 interface UserContext {
@@ -27,6 +29,8 @@ export const ThemeContext = createContext<UserContext>({
     email: "",
     displayName: "",
     photoURL: "",
+    uid: "",
+    accessToken: "",
   },
   setUser: () => {},
 });
@@ -38,6 +42,8 @@ export default function UserContextProvider({
     email: "",
     displayName: "",
     photoURL: "",
+    uid: "",
+    accessToken: "",
   });
 
   return (

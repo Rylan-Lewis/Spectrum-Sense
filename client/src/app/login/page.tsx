@@ -20,6 +20,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator"
 import { FaGoogle } from "react-icons/fa";
 import useGoogleAuth from "@/hooks/useGoogleAuth";
+import { setCookie } from 'nookies'
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
