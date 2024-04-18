@@ -30,6 +30,7 @@ export default function AvatarNav() {
       const response = await signOut(auth);
       setUser({ email: '', displayName: '', photoURL: '' , uid: '', accessToken: ''});
       destroyCookie(null, "token");
+      destroyCookie(null, "verified");
       destroyCookie(null, "uid");
       toast("You have been logged out successfully!");
       router.push('/')
@@ -50,7 +51,7 @@ export default function AvatarNav() {
                   {user.email.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              <div className="text-left">
+              <div className="hidden md:block text-left">
                 <p className="text-xs">{user.email}</p>
                 <p className="text-xs font-light">{`${month}, ${year}.`}</p>
               </div>
