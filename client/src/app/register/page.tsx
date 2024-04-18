@@ -61,7 +61,7 @@ export default function Register() {
         values.email,
         values.password
       );
-      router.push("/register/");
+      router.push("/register/more-details");
       toast(`Almost there! Just fill these few details.`);
     } catch (error) {
       toast(`Error: ${error}`);
