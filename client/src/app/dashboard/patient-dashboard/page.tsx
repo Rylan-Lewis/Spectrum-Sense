@@ -61,7 +61,7 @@ function VideoCard() {
       formData.append("imagefile", imageFile);
 
       try {
-        const response = await fetch("http://kartikeyamishra.pythonanywhere.com/predict", {
+        const response = await fetch("https://kartikeyamishra.pythonanywhere.com/predict", {
           method: "POST",
           body: formData,
         });
@@ -133,7 +133,7 @@ function VideoCard() {
         formData.append("imagefile", file);
 
         try {
-          const response = await fetch("http://kartikeyamishra.pythonanywhere.com/predict", {
+          const response = await fetch("https://kartikeyamishra.pythonanywhere.com/predict", {
             method: "POST",
             body: formData,
           });
