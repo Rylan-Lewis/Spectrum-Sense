@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Spectrum Sense",
   description:
     "Made with ❤️ by Kartikeya Mishra, Rylan Lewis & Mustafa Motiwala",
-  manifest: '/manifest.webmanifest'
+  manifest: '/manifest.webmanifest',
 };
 
 export default function RootLayout({
@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+      <link rel="apple-touch-icon" href="/icon.png"></link>
       <link rel="manifest" href="/manifest.webmanifest" />
       </head>
       <body className={poppins.className}>

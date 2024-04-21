@@ -55,7 +55,7 @@ const DashboardPage = () => {
     }
   }, [router, user]);
 
-  return <div>Loading...</div>; // Placeholder while checking user type
+  return <div className="w-full h-screen flex justify-center items-center">Loading...</div>; // Placeholder while checking user type
 };
 
 export default DashboardPage;
