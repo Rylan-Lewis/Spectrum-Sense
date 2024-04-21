@@ -67,22 +67,23 @@ function VideoCard() {
         });
 
         if (response.ok) {
-          const data: PredictionResult = await response.json();
+          const data: PredictionResult = await response.json() as PredictionResult
           try {
             const response = await updateDoc(doc(db, "patient", `${user.uid}`), {
               prediction: `${data.prediction}`,
-              not_autistic_prob: data.probabilities[0] as number, // Type assertion here
-              autistic_prob: data.probabilities[1] as number, // Type assertion here
+              not_autistic_prob: data.probabilities[0], // Corrected here
+              autistic_prob: data.probabilities[1], // Corrected here
             });
             toast(
               "The prediction has successfully been sent to the doctor you are consulting!"
             );
+            setToggle(false);
             router.push("/");
           } catch (error) {
             console.error("Error setting document:", error);
             toast("Failed to send prediction. Please try again!");
           }
-
+          
           console.log(data);
           // Handle the response data as needed
         } else {
@@ -130,12 +131,12 @@ function VideoCard() {
           });
 
           if (response.ok) {
-            const data: PredictionResult = await response.json();
+            const data: PredictionResult = await response.json() as PredictionResult;
             try {
               const response = await updateDoc(doc(db, "patient", `${user.uid}`), {
                 prediction: `${data.prediction}`,
-                not_autistic_prob: data.probabilities[0][0], // Type assertion here
-                autistic_prob: data.probabilities[0][1], // Type assertion here
+                not_autistic_prob: data.probabilities[0], // Corrected here
+                autistic_prob: data.probabilities[1], // Corrected here
               });
               toast(
                 "The prediction has successfully been sent to the doctor you are consulting!"
@@ -145,7 +146,7 @@ function VideoCard() {
             } catch (error) {
               console.error("Error setting document:", error);
               toast("Failed to send prediction. Please try again!");
-            }  
+            }            
           } else {
             console.error("Failed to make prediction");
           }
