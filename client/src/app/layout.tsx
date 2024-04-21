@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+      <link rel="manifest" href="/manifest.webmanifest" />
+      </head>
       <body className={poppins.className}>
         <ThemeProvider
           attribute="class"
