@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Spectrum Sense",
   description:
     "Made with ❤️ by Kartikeya Mishra, Rylan Lewis & Mustafa Motiwala",
+  manifest: '/manifest.json'
 };
 
 export default function RootLayout({
