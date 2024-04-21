@@ -1,11 +1,10 @@
+
+
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+  dest: 'public'
+})
 const nextConfig = {};
 
-// Import next-pwa using ES module syntax
-import withPWA from 'next-pwa';
 
-// Pass the configuration object directly to withPWA
-export default withPWA({
-  ...nextConfig,
-  dest: 'public'
-});
+export default nextConfig;
