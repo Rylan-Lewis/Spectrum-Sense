@@ -67,22 +67,31 @@ function VideoCard() {
         });
 
         if (response.ok) {
-          const data: PredictionResult = await response.json();
+          const data: PredictionResult = await response.json() as PredictionResult
           try {
+            const probabilitiesArray = data.probabilities[0];
+            if (Array.isArray(probabilitiesArray) && probabilitiesArray.length === 2) {
+              const not_autistic_prob = probabilitiesArray[0];
+              const autistic_prob = probabilitiesArray[1];
+              // Now you can safely use not_autistic_prob and autistic_prob
+              
             const response = await updateDoc(doc(db, "patient", `${user.uid}`), {
               prediction: `${data.prediction}`,
-              not_autistic_prob: data.probabilities[0] as number, // Type assertion here
-              autistic_prob: data.probabilities[1] as number, // Type assertion here
+              not_autistic_prob: not_autistic_prob,
+              autistic_prob: autistic_prob,
             });
             toast(
               "The prediction has successfully been sent to the doctor you are consulting!"
             );
+            setToggle(false);
             router.push("/");
+          }
           } catch (error) {
             console.error("Error setting document:", error);
             toast("Failed to send prediction. Please try again!");
-          }
-
+          }                 
+           
+                  
           console.log(data);
           // Handle the response data as needed
         } else {
@@ -130,22 +139,32 @@ function VideoCard() {
           });
 
           if (response.ok) {
-            const data: PredictionResult = await response.json();
+            const data: PredictionResult = await response.json() as PredictionResult;
+            console.log(data);
+            
             try {
+              const probabilitiesArray = data.probabilities[0];
+              if (Array.isArray(probabilitiesArray) && probabilitiesArray.length === 2) {
+                const not_autistic_prob = probabilitiesArray[0];
+                const autistic_prob = probabilitiesArray[1];
+                // Now you can safely use not_autistic_prob and autistic_prob
+                
               const response = await updateDoc(doc(db, "patient", `${user.uid}`), {
                 prediction: `${data.prediction}`,
-                not_autistic_prob: data.probabilities[0][0], // Type assertion here
-                autistic_prob: data.probabilities[0][1], // Type assertion here
+                not_autistic_prob: not_autistic_prob,
+                autistic_prob: autistic_prob,
               });
               toast(
                 "The prediction has successfully been sent to the doctor you are consulting!"
               );
               setToggle(false);
               router.push("/");
+            }
             } catch (error) {
               console.error("Error setting document:", error);
               toast("Failed to send prediction. Please try again!");
-            }  
+            }          
+                                 
           } else {
             console.error("Failed to make prediction");
           }
